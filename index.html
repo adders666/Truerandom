@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEATH-ROLL // Quantum True Randomiser</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎲</text></svg>">
+</head>
+<body>
+    <!-- Background Matrix Rain / Cyber Stream Canvas -->
+    <canvas id="matrix-bg"></canvas>
+
+    <!-- CRT Scanlines and Vignette Overlay -->
+    <div class="crt-overlay"></div>
+
+    <div class="cyber-container">
+        <!-- Top HUD Navigation -->
+        <header class="top-system-hud">
+            <div class="hud-left">
+                <div class="system-title">
+                    <span>⚡ DEATH-ROLL</span>
+                    <span class="system-badge">QUANTUM TRUE RANDOMISER</span>
+                </div>
+            </div>
+            <div class="hud-right">
+                <div class="hud-control-group">
+                    <span>AUDIO</span>
+                    <button id="btn-sound-toggle" class="cyber-btn-icon" title="Toggle Audio Synthesizer">🔊 ON</button>
+                    <input type="range" id="sound-volume" class="slider-cyber" min="0" max="1" step="0.05" value="0.6" style="width: 70px;">
+                </div>
+                <div class="hud-control-group">
+                    <span class="system-badge" style="border-color: var(--neon-cyan); color: var(--neon-cyan);">ENTROPY: 10 SENSORS</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- ================================================================ -->
+        <!-- SCREEN 1: MISSION SETUP & TARGET CONFIGURATION MENU              -->
+        <!-- ================================================================ -->
+        <main id="screen-setup" class="screen active">
+            <div class="terminal-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span>🎯 PROTOCOL INITIALISATION</span>
+                    </div>
+                    <div class="slots-counter">TARGET CAPACITY: <span id="slot-count-badge">4</span> / 10</div>
+                </div>
+
+                <!-- Presets Ribbon -->
+                <div class="presets-container">
+                    <div class="presets-label">⚡ QUICK PROTOCOL PRESETS</div>
+                    <div class="presets-grid">
+                        <button class="preset-chip" data-preset="takeaway">🍕 Friday Takeaway (7)</button>
+                        <button class="preset-chip" data-preset="coffee">☕ Who Makes Coffee? (4)</button>
+                        <button class="preset-chip" data-preset="dishes">🍽️ Dish Duty Elimination (3)</button>
+                        <button class="preset-chip" data-preset="movie">🎬 Movie Night Genre (5)</button>
+                        <button class="preset-chip" data-preset="first">🎲 Boardgame First Turn (4)</button>
+                        <button class="preset-chip" data-preset="custom">🧹 Blank Custom (2)</button>
+                    </div>
+                </div>
+
+                <!-- Objective Title Input -->
+                <div class="form-group">
+                    <label class="form-label" for="input-objective">MISSION TITLE / WHAT ARE YOU RANDOMISING?</label>
+                    <input type="text" id="input-objective" class="cyber-input" value="Friday Takeaway Protocol" placeholder="e.g. Who does the dishes? What takeaway tonight?" maxlength="60">
+                </div>
+
+                <!-- Dynamic Target List Grid -->
+                <div class="targets-header">
+                    <label class="form-label">TARGET CONTESTANTS / FIELDS (EACH FIELD PLAYS IN THE DEATH-ROLLS)</label>
+                </div>
+                <div id="targets-list-grid" class="targets-grid">
+                    <!-- Populated dynamically via JS -->
+                </div>
+
+                <div>
+                    <button type="button" id="btn-add-target" class="add-target-btn">
+                        <span>+ ADD TARGET SLOT</span>
+                    </button>
+                </div>
+
+                <!-- Tournament Settings & Mode -->
+                <div class="settings-columns">
+                    <div>
+                        <label class="form-label">TOURNAMENT RULE LOGIC</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="rule-mode" value="SURVIVOR_WINS" checked>
+                                <div class="radio-text">
+                                    <strong>👑 BATTLE ROYALE (LAST SURVIVOR WINS)</strong>
+                                    <small>When a player hits 0, they are ELIMINATED. We repeat until 1 winner remains! (Perfect for takeaways, movies, prizes).</small>
+                                </div>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="rule-mode" value="SACRIFICE_FIRST">
+                                <div class="radio-text">
+                                    <strong>⚡ FIRST CASUALTY SACRIFICED (CHORE DUTY)</strong>
+                                    <small>The very first player to hit 0 is instantly chosen for the chore/task! (Perfect for dishes, cleaning, coffee duty).</small>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="form-label">ANIMATION SPEED & ATMOSPHERE</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="speed-mode" value="cinematic" checked>
+                                <div class="radio-text">
+                                    <strong>🎬 HOLLYWOOD HYPE MODE</strong>
+                                    <small>Full suspense, animated scientific noise death-rolls, tense odometer reel spins.</small>
+                                </div>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="speed-mode" value="warp">
+                                <div class="radio-text">
+                                    <strong>⚡ WARP SPEED MODE</strong>
+                                    <small>High-speed calculations and lightning rolls for quick decisions.</small>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Button -->
+                <div class="action-banner">
+                    <button type="button" id="btn-engage-randomiser" class="btn-cyber-primary">
+                        🚀 ENGAGE QUANTUM ENTROPY PROTOCOL
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <!-- ================================================================ -->
+        <!-- SCREEN 2: HOLLYWOOD SCIENTIFIC HACKING CEREMONY                  -->
+        <!-- ================================================================ -->
+        <section id="screen-ceremony" class="screen">
+            <div class="ceremony-status-bar">
+                <div class="ceremony-heading">
+                    <span class="system-badge" style="background: rgba(0, 240, 255, 0.15); border-color: var(--neon-cyan); color: var(--neon-cyan);">STAGE 01</span>
+                    <span>QUANTUM ENTROPY HARVEST & SCIENTIFIC DEATH-ROLLS</span>
+                </div>
+                <div class="progress-track">
+                    <div id="ceremony-progress-fill" class="progress-fill"></div>
+                </div>
+            </div>
+
+            <!-- Monolithic 30-Digit Assembled Master Display -->
+            <div class="assembly-panel">
+                <div class="assembly-label">MASTER 30-DIGIT RANDOM SEED BUFFER (10 SENSORS × 3 DIGITS)</div>
+                <div id="digit-slots-container" class="digit-slots-container">
+                    <!-- 10 slots populated by JS -->
+                </div>
+            </div>
+
+            <!-- 10 Scientific Noise Channels Grid -->
+            <div id="channels-grid" class="channels-grid">
+                <!-- 10 scientific cards populated by JS -->
+            </div>
+
+            <!-- Hacker Telemetry Log Window -->
+            <div id="telemetry-console" class="telemetry-console">
+                <div class="telemetry-line">INITIALIZING HIGH-PRECISION QUANTUM SENSOR CLUSTER...</div>
+                <div class="telemetry-line">SAMPLING CASIMIR VACUUM AND PLANCK CMB TEMPERATURE...</div>
+            </div>
+
+            <div class="ceremony-controls">
+                <button type="button" id="btn-skip-ceremony" class="cyber-btn-icon" style="padding: 10px 20px;">
+                    ⚡ FAST WARP TO STABILIZED SEED
+                </button>
+            </div>
+        </section>
+
+        <!-- ================================================================ -->
+        <!-- SCREEN 3: BIGINT DEATH-ROLLING ARENA (BATTLEFIELD)               -->
+        <!-- ================================================================ -->
+        <section id="screen-arena" class="screen">
+            <!-- Header Bar -->
+            <div class="arena-header-bar">
+                <div class="arena-objective-badge">
+                    <span class="arena-objective-label">ACTIVE OBJECTIVE</span>
+                    <span id="arena-objective-text" class="arena-objective-title">Friday Takeaway Protocol</span>
+                </div>
+                <div class="arena-stats">
+                    <div class="arena-stat-item">
+                        <span class="arena-stat-label">ROUND</span>
+                        <span id="arena-round-number" class="arena-stat-val">01</span>
+                    </div>
+                    <div class="arena-stat-item">
+                        <span class="arena-stat-label">CONTESTANTS ALIVE</span>
+                        <span id="arena-alive-count" class="arena-stat-val">4 / 4</span>
+                    </div>
+                    <div class="arena-stat-item">
+                        <span class="arena-stat-label">TOTAL ROLLS</span>
+                        <span id="arena-total-rolls" class="arena-stat-val">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grand 30-Digit Odometer Display -->
+            <div class="odometer-grand-card">
+                <div class="odometer-bound-tag" id="odometer-bound-label">CURRENT BOUNDED CEILING (ROLL 0 TO Y)</div>
+                <div id="odometer-display" class="odometer-number-display">000000000000000000000000000000</div>
+            </div>
+
+            <!-- Turn Action Command Bar -->
+            <div class="turn-action-bar">
+                <div id="active-turn-indicator" class="active-turn-indicator">
+                    <span>TURN ON DECK:</span>
+                    <span id="active-player-name-badge" style="color: var(--neon-cyan);">Target 1</span>
+                </div>
+
+                <button type="button" id="btn-roll-action" class="btn-roll-trigger">
+                    <span>🎲 ROLL FOR <span id="btn-player-name-label">PLAYER</span> (0 - Y)</span>
+                </button>
+
+                <div class="turn-subcontrols">
+                    <label style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; cursor: pointer;">
+                        <input type="checkbox" id="chk-auto-play" style="accent-color: var(--neon-cyan);">
+                        <span>AUTO-PILOT ROLLS</span>
+                    </label>
+
+                    <!-- Interactive Roll Speed Slider & Quick Toggles -->
+                    <div class="roll-speed-hud" style="display: flex; align-items: center; gap: 10px; background: rgba(0, 0, 0, 0.5); padding: 6px 14px; border: 1px solid rgba(0, 240, 255, 0.3); border-radius: 4px;">
+                        <span style="font-size: 0.72rem; color: var(--neon-amber); letter-spacing: 1px; font-weight: bold; text-transform: uppercase;">ROLL SPEED:</span>
+                        <input type="range" id="roll-speed-slider" class="slider-cyber" min="1" max="5" step="1" value="2" style="width: 80px;" title="Adjust roll animation and turn speed">
+                        <span id="roll-speed-badge" class="system-badge" style="border-color: var(--neon-cyan); color: var(--neon-cyan); font-size: 0.68rem; min-width: 80px; text-align: center;">2x Standard</span>
+                        <div style="display: flex; gap: 4px;">
+                            <button type="button" class="speed-quick-btn" data-speed="1" title="1x Cinematic / Dramatic Suspense">1x</button>
+                            <button type="button" class="speed-quick-btn" data-speed="3" title="5x Rapid Pacing">5x</button>
+                            <button type="button" class="speed-quick-btn" data-speed="5" title="25x Ludicrous / Instant Lightning">25x ⚡</button>
+                        </div>
+                    </div>
+
+                    <button type="button" id="btn-abort-to-menu" class="cyber-btn-icon" style="font-size: 0.75rem; border-color: rgba(255, 255, 255, 0.2); color: var(--text-dim);">
+                        ⚙️ RECONFIGURE
+                    </button>
+                </div>
+            </div>
+
+            <!-- Contestants Live Matrix Grid -->
+            <div id="contestants-matrix" class="contestants-matrix">
+                <!-- Contestant cards rendered here -->
+            </div>
+        </section>
+
+        <!-- ================================================================ -->
+        <!-- SCREEN 4: VICTORY & CRYPTOGRAPHIC AUDIT DEBRIEF                  -->
+        <!-- ================================================================ -->
+        <section id="screen-victory" class="screen">
+            <div class="victory-card">
+                <div id="victory-avatar" class="victory-icon">👑</div>
+                <div id="victory-header-text" class="victory-title">SOLE SURVIVOR SELECTED</div>
+                <div id="victory-target-name" class="victory-name">PIZZA</div>
+                <div class="quantum-certified-stamp">
+                    ✓ MATHEMATICALLY CERTIFIED TRUE RANDOM // ZERO SELECTION BIAS
+                </div>
+
+                <div style="display: flex; justify-content: center; gap: 16px; margin-top: 10px;">
+                    <button type="button" id="btn-play-again" class="btn-cyber-primary">
+                        🔄 RUN AGAIN (SAME TARGETS)
+                    </button>
+                    <button type="button" id="btn-edit-protocol" class="cyber-btn-icon" style="padding: 14px 24px; font-size: 1rem;">
+                        ⚙️ NEW PROTOCOL
+                    </button>
+                </div>
+            </div>
+
+            <!-- Audit Trail Table -->
+            <div class="terminal-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span>📜 COMPLETE CRYPTOGRAPHIC AUDIT TRAIL</span>
+                    </div>
+                    <button type="button" id="btn-copy-audit" class="cyber-btn-icon">
+                        📋 COPY AUDIT LOG
+                    </button>
+                </div>
+                <p style="font-size: 0.8rem; color: var(--text-dim); margin-bottom: 12px;">
+                    Every single roll was sampled using CSPRNG hardware entropy from 10 distinct physical noise telemetry streams.
+                </p>
+                <div class="audit-table-wrapper">
+                    <table class="audit-table">
+                        <thead>
+                            <tr>
+                                <th>ROUND</th>
+                                <th>TARGET</th>
+                                <th>ROLLED FROM</th>
+                                <th>ROLL OUTCOME</th>
+                                <th>RESULT</th>
+                                <th>TIMESTAMP</th>
+                            </tr>
+                        </thead>
+                        <tbody id="audit-table-body">
+                            <!-- Populated with all historical rolls -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Red Alert Elimination Modal Overlay -->
+    <div id="elimination-banner" class="elimination-banner">
+        <div class="elimination-skull">💀</div>
+        <div class="elimination-title">CRITICAL COLLAPSE: HIT 0</div>
+        <div id="elimination-player-desc" class="elimination-desc">Target has rolled 0 and is eliminated from protocol.</div>
+        <span class="system-badge" style="border-color: var(--neon-alert); color: var(--neon-alert);">PROCEEDING TO NEXT PHASE...</span>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/audio.js"></script>
+    <script src="js/entropy.js"></script>
+    <script src="js/deathroll.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

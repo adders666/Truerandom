@@ -1,0 +1,38 @@
+{
+  "name": "truerandom",
+  "version": "1.0.0",
+  "description": "An absolutely over the top true randomiser for things (e.g. doing the dishes, what takeaway we are having)",
+  "main": "server.js",
+  "bin": {
+    "truerandom": "./bin/cli.js"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "open": "node bin/cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adders666/Truerandom.git"
+  },
+  "keywords": [
+    "random",
+    "randomiser",
+    "true-random",
+    "death-roll",
+    "quantum",
+    "entropy",
+    "cyberpunk",
+    "hacker-ui",
+    "dispute-resolver",
+    "family-peacekeeper",
+    "takeaway-selector",
+    "dish-duty"
+  ],
+  "author": "adders666",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/adders666/Truerandom/issues"
+  },
+  "homepage": "https://github.com/adders666/Truerandom#readme"
+}
