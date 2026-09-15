@@ -109,25 +109,28 @@ Complete timestamped breakdown of every single roll, upper bound, and round seed
 
 ## 🚀 How to Run
 
-### Option A: Via NPX / NPM (Standalone)
-Run instantly without installing anything:
+### Option A: Single-File Release (Zero Install, 1-Click)
+Download **`truerandom-standalone.html`** from the [Releases](https://github.com/adders666/Truerandom/releases) tab.  
+It is **100% self-contained** (~108 KB) with all retro styles, procedural Web Audio synthesizers, and quantum BigInt algorithms bundled into a single file. Just double-click it to run on any laptop, tablet, or phone!
+
+### Option B: Via NPX / NPM (Local Server)
+Run instantly in your terminal:
 ```bash
 npx truerandom
 ```
-
 Or clone and start:
 ```bash
 npm start
 ```
 *(Your default web browser will launch automatically to the cyberpunk HUD!)*
 
-### Option B: Via Python (UV)
+### Option C: Via Python (UV)
 ```bash
 uv run python server.py
 ```
 
-### Option C: Direct Browser Launch
-No server required! Simply double-click `index.html` in Chrome, Firefox, Edge, or Safari.
+### Option D: Direct From Source
+Double-click `index.html` in the repository root.
 
 ---
 
