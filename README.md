@@ -3,6 +3,7 @@
 > **An absolutely over the top true randomiser for things (e.g. doing the dishes, what takeaway we are having)**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Prompt Decipherer](https://img.shields.io/badge/Prompt%20Deciphered%20By-Gemini%20(Antigravity)-8b5cf6.svg)](#)
 [![Arguments Prevented](https://img.shields.io/badge/Arguments%20Prevented-%E2%88%9E-00f0ff.svg)](#)
 [![Dishes Washed](https://img.shields.io/badge/Dishes%20Washed-Guaranteed-ffb700.svg)](#)
 [![Quantum Rigor](https://img.shields.io/badge/Quantum%20Certified-100%25-ff0055.svg)](#)
@@ -144,6 +145,17 @@ No server required! Simply double-click `index.html` in Chrome, Firefox, Edge, o
 | **08** | **Pulsar PSR B1919+21 Jitter** | Neutron star magnetosphere rotational glitches | Microsecond pulse offset |
 | **09** | **Chaotic Lorenz Attractor** | Non-linear deterministic atmospheric fluid chaos | Strange attractor convection |
 | **10** | **Hardware Microsecond Drift** | CSPRNG kernel entropy pool + CPU timestamp jitter | Execution clock jitter |
+
+---
+
+## 🤖 Neural Transmission & Prompt Telemetry
+
+Architecture, procedural Web Audio synthesizers, and BigInt quantum death-rolling mathematics deciphered from raw stream-of-consciousness prompt telemetry and co-engineered in partnership with **Gemini (Antigravity)**.
+
+> *"we take 10 random scientific numbers, generated with random noise, and roll from 0-X number until we have a 3 digit number on each one of the 10, and put all of those 3 digit numbers together, to form the number for game 1, for every listed thing we want to randomise (e.g. who does the dishes child 1-3) we take turns per child to roll on our randomised 30 digit number 0 - Y and the first child to hit 0 is eliminated, we then do the whole process again until 1 is left and that person is picked, its should look like a scene from a hacking movie..."*  
+> — **adders666**, Prompt Architect
+
+**Result**: 100% mathematical domestic ceasefire.
 
 ---
 
